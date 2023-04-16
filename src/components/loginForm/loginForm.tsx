@@ -1,5 +1,7 @@
 import * as React from 'react';
 import './loginForm.css'
+import axios from 'axios'
+imor
 
 export interface ILoginFormProps {
 }
@@ -17,6 +19,27 @@ export function LoginForm (props: ILoginFormProps) {
 
   const [formValid, setFormValid] = React.useState(false)
 
+  const dispatch = useDispatch()
+
+  const login = async (e:any, username:String, password:String) => {
+    e.preventDefault()
+
+    return async dispatch => {
+      
+      try {
+        
+        const response = await axios.post('http://localhost:5000/auth/login', {username, password})
+        console.log(response.data)
+
+
+      } catch (e:any) {
+        
+        alert(e.response.data.message)
+      
+      }
+    
+    }
+  }
 
   const emailHandler = (e:any) => {
     setEmail(e.target.value)

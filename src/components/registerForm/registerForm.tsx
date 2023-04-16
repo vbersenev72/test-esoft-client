@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './registerForm.css'
+import axios from 'axios'
 
 export interface IRegFormProps {
 }
@@ -24,6 +25,18 @@ export function RegForm (props: IRegFormProps) {
   const [lastNameError, setLastNameError] = React.useState('Фамилия не может быть пустой')
 
   const [formValid, setFormValid] = React.useState<boolean>(false)
+
+
+
+  const registration = async (e:any, name:String, lastname:String, username:String, password:String) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post('http://localhost:5000/auth/registration', {name, lastname, username, password})
+      alert(response.data.message)
+    } catch (e:any) {
+      alert(e.response.data.message)
+    }
+  }
 
   const blueHandler = (e: any) => {
     switch (e.target.name) {
@@ -124,7 +137,7 @@ export function RegForm (props: IRegFormProps) {
         <input name='lastname' type="text" value={lastname} onChange={(e) => lastNameHandler(e)} placeholder='Lastname' onBlur={e => blueHandler(e)} style={{margin: '4px', height: '30px', borderRadius: '10px', width: "250px"}}/>
         {(lastNameDirty && lastNameError) && <div style={{color: 'red'}}>{lastNameError}</div>}
 
-        <button style={{padding: '4px', height: '30px'}} type='submit' disabled={formValid}>Зарегистрироваться</button>
+        <button style={{padding: '4px', height: '30px'}} type='submit' disabled={formValid} onClick={(e) => registration(e, name, lastname, email, pass)}>Зарегистрироваться</button>
 
         <h3>Уже есть аккаунт? <a href="/login">Войдите</a></h3>
       </div>
