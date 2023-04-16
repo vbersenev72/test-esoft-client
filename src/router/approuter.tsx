@@ -11,6 +11,7 @@ export interface IAppRouterProps {
 
 export function AppRouter (props: IAppRouterProps) {
 
+    
     const [auth, setAuth] = useState<boolean>(false)
 
   return (
