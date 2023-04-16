@@ -2,12 +2,11 @@ import * as React from 'react';
 import { LoginForm } from '../components/loginForm/loginForm';
 
 export interface ILoginProps {
+
 }
 
-export function Login (props: ILoginProps) {
+export function Login ({setAuth}: any) {
   return (
-    <div>
-        <LoginForm/>
-    </div>
+        <LoginForm setAuth={setAuth}/>
   );
 }

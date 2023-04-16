@@ -1,12 +1,14 @@
 import * as React from 'react';
 import './loginForm.css'
 import axios from 'axios'
-imor
+import { redirect } from 'react-router-dom';
+
 
 export interface ILoginFormProps {
+
 }
 
-export function LoginForm (props: ILoginFormProps) {
+export function LoginForm ({setAuth}:any) {
 
   const [email, setEmail] = React.useState('')
   const [pass, setPass] = React.useState('')
@@ -19,27 +21,30 @@ export function LoginForm (props: ILoginFormProps) {
 
   const [formValid, setFormValid] = React.useState(false)
 
-  const dispatch = useDispatch()
+
+
 
   const login = async (e:any, username:String, password:String) => {
-    e.preventDefault()
-
-    return async dispatch => {
-      
+      e.preventDefault()
       try {
-        
+
         const response = await axios.post('http://localhost:5000/auth/login', {username, password})
         console.log(response.data)
 
+        if (response.data.token) {
+          setAuth(true)
+          return redirect('/')
+        }
+
 
       } catch (e:any) {
-        
-        alert(e.response.data.message)
-      
+
+        console.log(e)
+
       }
-    
-    }
+
   }
+
 
   const emailHandler = (e:any) => {
     setEmail(e.target.value)
@@ -53,6 +58,7 @@ export function LoginForm (props: ILoginFormProps) {
     }
   }
 
+
   const passHandler = (e:any) => {
     setPass(e.target.value)
     setPassDirty(true)
@@ -65,6 +71,7 @@ export function LoginForm (props: ILoginFormProps) {
       setPassError('')
     }
   }
+
 
   const blueHandler = (e: any) => {
     switch (e.target.name) {
@@ -81,6 +88,7 @@ export function LoginForm (props: ILoginFormProps) {
         break
     }
   }
+
 
   React.useEffect(() => {
     if (emailError || passError) {
@@ -104,7 +112,7 @@ export function LoginForm (props: ILoginFormProps) {
           <input style={{margin: '4px', height: '30px', borderRadius: '10px', width: '250px'}} onBlur={(e) => blueHandler(e)} name='pass' type='password' value={pass} placeholder='Password' onChange={e => passHandler(e)}/>
           {(passDirty && passError) && <div style={{color: 'red'}}>{passError}</div>}
 
-          <button style={{padding:'4px', height: '30px'}} type='submit' disabled={formValid}>Войти</button>
+          <button style={{padding:'4px', height: '30px'}} type='submit' disabled={formValid} onClick={(e) => login(e, email, pass)}>Войти</button>
 
           <h3>Еще нет аккаунта? <a href="/">Регистрация</a></h3>
         </div>

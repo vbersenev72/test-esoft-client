@@ -5,14 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppRouter } from './router/approuter';
 
 import './index.css'
+import { Provider } from 'react-redux';
+import store from './redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 
 root.render(
-  <BrowserRouter>
-    <AppRouter/>
-  </BrowserRouter>
+    <BrowserRouter>
+      <AppRouter/>
+    </BrowserRouter>
 )
 

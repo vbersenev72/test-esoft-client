@@ -11,7 +11,7 @@ export interface IAppRouterProps {
 
 export function AppRouter (props: IAppRouterProps) {
 
-    
+
     const [auth, setAuth] = useState<boolean>(false)
 
   return (
@@ -23,7 +23,7 @@ export function AppRouter (props: IAppRouterProps) {
     </Routes>
     :
     <Routes>
-        <Route element={<Login/>} path='/login'/>
+        <Route element={<Login setAuth={setAuth}/>} path='/login'/>
         <Route element={<Register/>} path='/'/> {/*регистрация если юзер не авторизован*/}
         <Route element={<NotFound/>} path='*'/>
     </Routes>
