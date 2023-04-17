@@ -16,6 +16,14 @@ export function TaskList (props: ITaskListProps) {
         setTasks(response.data)
     }
 
+    const deleteTask = async (id) => {
+        const newTaskList = [...tasks].filter((task)=> task._id !== id)
+        setTasks(newTaskList)
+
+        const response = await axios.post() // дописать фукнцию для удаления задачи (в апи тоже)
+
+    }
+
     React.useEffect(() => {
         getTasks('http://localhost:5000/auth/tasksuser', token)
 
@@ -29,14 +37,14 @@ export function TaskList (props: ITaskListProps) {
             <div>
                 {tasks.map((task:any)=>(
                     <div className='task' key={task._id}>
-                        <p>{task.des}</p>
-                        <p>{task.dateFinish}</p>
-                        <p>{task.dateCreate}</p>
-                        <p>{task.title}</p>
-                        <p>{task.datePut}</p>
-                        <p>{task.priority}</p>
-                        <p>{task.status}</p>
-                        <p>{task.creator}</p>
+                        <h2 style={{display: 'flex', justifyContent: 'center'}}>{task.title}</h2>
+                        <div style={{}}>{task.des}</div>
+                        <div>Дата окончания : {task.dateFinish}</div>
+                        <div>Дата создания : {task.dateCreate}</div>
+                        <div>Последнее обновление : {task.datePut}</div>
+                        <div>Приоритет : {task.priority}</div>
+                        <div>Статус : {task.status}</div>
+                        <button onClick={()=> }>Удалить задачу</button>
                     </div>
                 ))}
             </div>

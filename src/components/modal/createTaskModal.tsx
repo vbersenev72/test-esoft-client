@@ -15,7 +15,7 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
     const [des, setDes] = React.useState('')
     const [holder, setHolder] = React.useState('')
     const [priority, setPriority] = React.useState('')
-    const [dateFinish, setDateFinish] = React.useState<any>(new Date())
+    const [dateFinish, setDateFinish] = React.useState<any>('')
 
     const [validForm, setValidForm] = React.useState<boolean>(false)
 
@@ -26,7 +26,14 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
     }
 
     const CreateTask = async () => {
-        const response = await axios.post('http://localhost:5000/auth/')
+        try {
+            const response = await axios.post('http://localhost:5000/auth/create', {
+                title, des, dateFinish, dateCreate: new Date(), datePut: new Date(), priority, status: 'Выполняется', creator: localStorage.token, holder
+                    // В CREATOR ПЕРЕДАЕТСЯ JWT-ТОКЕН            
+            })
+        } catch(e) {
+            alert(e)
+        }
     }
 
 
@@ -57,14 +64,14 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <div>
                         <p style={{marginLeft: '10px'}}>Приоритет выполнения :</p>
-                        <select className='modal__content__priority' onChange={(e) => setPriority(e.target.value)} name="" id="">
-                            <option value="">High</option>
-                            <option value="">Medium</option>
-                            <option value="">Low</option>
+                        <select className='modal__content__priority' value={priority} onChange={(e) => setPriority(e.target.value)} name="" id="">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
                         </select>
                     </div>
 
-                    <button className='modal__content__create' disabled={!validForm}><h2>Создать</h2></button>
+                    <button className='modal__content__create' disabled={!validForm} onClick={() => CreateTask()}><h2>Создать</h2></button>
                 </div>
 
 
