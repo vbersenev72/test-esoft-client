@@ -2,7 +2,7 @@ import * as React from 'react';
 import './loginForm.css'
 import axios from 'axios'
 import { redirect } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 export interface ILoginFormProps {
 
@@ -21,6 +21,7 @@ export function LoginForm ({setAuth}:any) {
 
   const [formValid, setFormValid] = React.useState(false)
 
+  const navigate = useNavigate()
 
 
 
@@ -29,11 +30,13 @@ export function LoginForm ({setAuth}:any) {
       try {
 
         const response = await axios.post('http://localhost:5000/auth/login', {username, password})
+        localStorage.setItem('token', response.data.token)
+
         console.log(response.data)
 
         if (response.data.token) {
           setAuth(true)
-          return redirect('/')
+          navigate('/')
         }
 
 
@@ -42,6 +45,7 @@ export function LoginForm ({setAuth}:any) {
         console.log(e)
 
       }
+
 
   }
 
@@ -96,8 +100,10 @@ export function LoginForm ({setAuth}:any) {
     } else {
       setFormValid(false)
     }
-
-  }, [emailError, passError])
+    if (localStorage.token) {
+      setAuth(true)
+    }
+  }, [emailError, passError, setAuth, navigate])
 
 
   return (

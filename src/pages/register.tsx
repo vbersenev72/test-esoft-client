@@ -4,10 +4,10 @@ import { RegForm } from '../components/registerForm/registerForm';
 export interface IRegisterProps {
 }
 
-export function Register (props: IRegisterProps) {
+export function Register ({setAuth}: any) {
   return (
     <div>
-        <RegForm/>
+        <RegForm setAuth={setAuth}/>
     </div>
   );
 }

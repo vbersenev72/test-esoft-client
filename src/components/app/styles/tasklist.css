@@ -1,0 +1,32 @@
+.tasklist {
+    height: 100%;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    width: 70vw;
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.tasklist_nothing {
+    padding-top: 20vh;
+
+    height: 100vh;
+    color: gray;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.task {
+    height: 240px;
+    border: 2px solid gray;
+    width: 65vw;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+
+    border-radius: 15px;
+}

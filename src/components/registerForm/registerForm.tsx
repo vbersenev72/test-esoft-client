@@ -5,7 +5,7 @@ import axios from 'axios'
 export interface IRegFormProps {
 }
 
-export function RegForm (props: IRegFormProps) {
+export function RegForm ({setAuth}: any) {
 
   const [email, setEmail] = React.useState('')
   const [pass, setPass] = React.useState('')
@@ -116,8 +116,11 @@ export function RegForm (props: IRegFormProps) {
     } else {
       setFormValid(false)
     }
+    if (localStorage.token) {
+      setAuth(true)
+    }
 
-  }, [emailError, passError, nameError, lastNameError])
+  }, [emailError, passError, nameError, lastNameError, setAuth])
 
 
   return (

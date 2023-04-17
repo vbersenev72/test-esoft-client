@@ -1,0 +1,20 @@
+.createtask {
+    display: flex;
+    justify-content: center;
+}
+
+.createtask_button {
+    height: 60px;
+    width: 180px;
+    background-color: rgb(14, 197, 14);
+    color: white;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    border-radius: 15px;
+}

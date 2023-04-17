@@ -1,10 +1,15 @@
 import React from 'react';
+import { Header } from './app/Header';
+import { TaskList } from './app/TaskLIst';
+import { CreateTask } from './app/CreateTask';
 
 
-function App() {
+function App({setAuth}:any) {
   return (
     <div className="App">
-      app
+      <Header setAuth={setAuth}/>
+      <CreateTask/>
+      <TaskList/>
     </div>
   );
 }

@@ -18,13 +18,13 @@ export function AppRouter (props: IAppRouterProps) {
     auth
      ?
     <Routes>
-        <Route element={<App/>} path='/'/>
+        <Route element={<App setAuth={setAuth}/>} path='/'/>
         <Route element={<NotFound/>} path='*'/>
     </Routes>
     :
     <Routes>
         <Route element={<Login setAuth={setAuth}/>} path='/login'/>
-        <Route element={<Register/>} path='/'/> {/*регистрация если юзер не авторизован*/}
+        <Route element={<Register setAuth={setAuth}/>} path='/'/> {/*регистрация если юзер не авторизован*/}
         <Route element={<NotFound/>} path='*'/>
     </Routes>
 
