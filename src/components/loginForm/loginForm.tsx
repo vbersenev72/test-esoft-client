@@ -120,7 +120,7 @@ export function LoginForm ({setAuth}:any) {
 
           <button style={{padding:'4px', height: '30px'}} type='submit' disabled={formValid} onClick={(e) => login(e, email, pass)}>Войти</button>
 
-          <h3>Еще нет аккаунта? <a href="/" style={{color: 'black'}}>Регистрация</a></h3>
+          <h3 style={{marginBottom: '10px', marginTop: '10px'}}>Еще нет аккаунта? <a href="/" style={{color: 'black'}}>Регистрация</a></h3>
         </div>
       </form>
   )

@@ -142,7 +142,7 @@ export function RegForm ({setAuth}: any) {
 
         <button style={{padding: '4px', height: '30px'}} type='submit' disabled={formValid} onClick={(e) => registration(e, name, lastname, email, pass)}>Зарегистрироваться</button>
 
-        <h3>Уже есть аккаунт? <a href="/login" style={{color: 'black'}}>Войдите</a></h3>
+        <h3 style={{marginBottom: '10px', marginTop: '10px'}}>Уже есть аккаунт? <a href="/login" style={{color: 'black'}}>Войдите</a></h3>
       </div>
 
 

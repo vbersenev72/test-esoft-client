@@ -28,9 +28,10 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
     const CreateTask = async () => {
         try {
             const response = await axios.post('http://localhost:5000/auth/create', {
-                title, des, dateFinish, dateCreate: new Date(), datePut: new Date(), priority, status: 'Выполняется', creator: localStorage.token, holder
-                    // В CREATOR ПЕРЕДАЕТСЯ JWT-ТОКЕН            
+                title, des, dateFinish, dateCreate: new Date(), datePut: new Date(), priority, status: 'Выполняется', token: localStorage.token, holder
             })
+            alert('Задача успешно создана!')
+            document.location.reload()
         } catch(e) {
             alert(e)
         }

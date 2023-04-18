@@ -16,12 +16,12 @@ export function TaskList (props: ITaskListProps) {
         setTasks(response.data)
     }
 
-    const deleteTask = async (id) => {
-        const newTaskList = [...tasks].filter((task)=> task._id !== id)
+    const deleteTask = async (_id:any) => {
+        const newTaskList = [...tasks].filter((task)=> task._id !== _id)
         setTasks(newTaskList)
 
-        const response = await axios.post() // дописать фукнцию для удаления задачи (в апи тоже)
-
+        const response = await axios.post('http://localhost:5000/auth/delete', {_id}) // дописать фукнцию для удаления задачи (в апи тоже)
+        document.location.reload()
     }
 
     React.useEffect(() => {
@@ -44,7 +44,8 @@ export function TaskList (props: ITaskListProps) {
                         <div>Последнее обновление : {task.datePut}</div>
                         <div>Приоритет : {task.priority}</div>
                         <div>Статус : {task.status}</div>
-                        <button onClick={()=> }>Удалить задачу</button>
+                        <div>Создатель : {task.creator}</div>
+                        <button onClick={() => deleteTask(task._id)}>Удалить задачу</button>
                     </div>
                 ))}
             </div>
