@@ -1,6 +1,7 @@
 import React from 'react'
 import './styles/tasklist.css'
 import axios from 'axios';
+import { UpdateTaskModal } from '../modal/updateTaskModal';
 
 
 export interface ITaskListProps {
@@ -21,7 +22,11 @@ export function TaskList (props: ITaskListProps) {
         setTasks(newTaskList)
 
         const response = await axios.post('http://localhost:5000/auth/delete', {_id}) // дописать фукнцию для удаления задачи (в апи тоже)
-        document.location.reload()
+    }
+
+
+    const updateTask = async (_id:any) => {
+
     }
 
     React.useEffect(() => {
@@ -46,6 +51,8 @@ export function TaskList (props: ITaskListProps) {
                         <div>Статус : {task.status}</div>
                         <div>Создатель : {task.creator}</div>
                         <button onClick={() => deleteTask(task._id)}>Удалить задачу</button>
+                        <button onClick={() => updateTask(task._id)} >Редактировать</button>
+
                     </div>
                 ))}
             </div>

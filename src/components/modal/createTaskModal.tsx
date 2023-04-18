@@ -19,11 +19,6 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
 
     const [validForm, setValidForm] = React.useState<boolean>(false)
 
-    const getUsers = async () => {
-        const response = await axios.post('http://localhost:5000/auth/users')
-        console.log(response.data);
-
-    }
 
     const CreateTask = async () => {
         try {
@@ -74,8 +69,6 @@ export function CreateTaskModal ({createTaskModal, setCreateTaskModal}: ICreateT
 
                     <button className='modal__content__create' disabled={!validForm} onClick={() => CreateTask()}><h2>Создать</h2></button>
                 </div>
-
-
 
             </div>
         </div>
