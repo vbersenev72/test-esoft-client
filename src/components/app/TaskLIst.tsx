@@ -9,6 +9,10 @@ export interface ITaskListProps {
 
 export function TaskList (props: ITaskListProps) {
 
+    const [updateTaskModal, setUpdateTaskModal] = React.useState(false)
+    const [dataTask, setDataTask] = React.useState<any>({})
+    const [id, setId] = React.useState<any>('')
+
     const [tasks, setTasks] = React.useState<any>()
     const token = localStorage.token
 
@@ -26,7 +30,11 @@ export function TaskList (props: ITaskListProps) {
 
 
     const updateTask = async (_id:any) => {
+        // const task = await axios.post('http://localhost:5000/auth/gettask', {_id})
+        // setDataTask(task)
 
+        setUpdateTaskModal(true)
+        setId(_id)
     }
 
     React.useEffect(() => {
@@ -55,6 +63,7 @@ export function TaskList (props: ITaskListProps) {
 
                     </div>
                 ))}
+                {updateTaskModal && <UpdateTaskModal updateTaskModal={updateTaskModal} setUpdateTaskModal={setUpdateTaskModal} _id={id}/>}
             </div>
             :
             <h1 className='tasklist_nothing'>Задач нет</h1>
