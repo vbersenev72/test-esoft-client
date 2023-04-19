@@ -10,9 +10,8 @@ export interface ITaskListProps {
 export function TaskList (props: ITaskListProps) {
 
     const [updateTaskModal, setUpdateTaskModal] = React.useState(false)
-    const [dataTask, setDataTask] = React.useState<any>({})
     const [id, setId] = React.useState<any>('')
-
+    const [group, setGroup] = React.useState('none')
     const [tasks, setTasks] = React.useState<any>()
     const token = localStorage.token
 
@@ -30,11 +29,13 @@ export function TaskList (props: ITaskListProps) {
 
 
     const updateTask = async (_id:any) => {
-        // const task = await axios.post('http://localhost:5000/auth/gettask', {_id})
-        // setDataTask(task)
-
         setUpdateTaskModal(true)
         setId(_id)
+    }
+
+
+    const groupTasks = () => {
+
     }
 
     React.useEffect(() => {
@@ -48,10 +49,10 @@ export function TaskList (props: ITaskListProps) {
         {
             tasks ?
             <div>
-                {tasks.map((task:any)=>(
+                { tasks.map((task:any)=>(
                     <div className='task' key={task._id}>
                         <h2 style={{display: 'flex', justifyContent: 'center'}}>{task.title}</h2>
-                        <div style={{}}>{task.des}</div>
+                        <div style={{}}>Описание : {task.des}</div>
                         <div>Дата окончания : {task.dateFinish}</div>
                         <div>Дата создания : {task.dateCreate}</div>
                         <div>Последнее обновление : {task.datePut}</div>
